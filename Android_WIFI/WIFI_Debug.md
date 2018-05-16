@@ -4,7 +4,7 @@
 
 ## 高通芯片
 
-> Firmware build info
+> **Firmware build info**
 >
 > - 使用 iwpriv
 >
@@ -18,7 +18,7 @@
 >   adb shell cat /proc/kmsg
 >   ```
 >
-> Android host logs
+> **Android host logs**
 >
 > - Android system logging
 >
@@ -91,3 +91,20 @@
 >     vendor/qcom/opensource/wlan/prima/CORE/VOSS/src/vos_trace.c
 >
 >   - WCNSS_qcom_cfg.ini
+>
+> **MAC 抓取 air log**
+>
+> - 打开 无线诊断  （点击无线图标，或按住 option）
+> - 打开 嗅探器，选择要抓取的 频段 和 频宽，开始抓取，完毕后，结束
+> - 抓取的 log 文件保存在 /var/tmp，在 Finder 中，shift + command + g，输入路径
+>
+> **WIFI 测试模式**
+>
+> ```
+> adb root && adb shell
+> ifconfig wlan0 up
+> echo 5 > /sys/module/wlan/parameters/con_mode
+> ftmdaemon -n -dd
+> ```
+>
+> 
