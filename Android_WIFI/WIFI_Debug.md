@@ -107,4 +107,12 @@
 > ftmdaemon -n -dd
 > ```
 >
+> **WIFI 更新 firmware**
+>
+> ```
+> adb root
+> adb shell mount -o rw,remount /firmware
+> adb push bdlwan.bin /firmware
+> ```
+>
 > 
