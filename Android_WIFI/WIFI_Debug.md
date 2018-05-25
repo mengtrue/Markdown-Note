@@ -102,6 +102,7 @@
 >
 > ```
 > adb root && adb shell
+> insmod /system/lib/modules/wlan.ko
 > ifconfig wlan0 up
 > echo 5 > /sys/module/wlan/parameters/con_mode
 > ftmdaemon -n -dd
