@@ -27,6 +27,8 @@
 > try increasing heap size with java option '-Xmx<size>' https://blog.csdn.net/csdn_zyp2015/article/details/56277765
 >
 > android.mk 引用：https://blog.csdn.net/gdutxiaoxu/article/details/78187420?locationNum=2&fps=1
+>
+> 过程：https://www.jianshu.com/p/3922ec229077
 
 #### APP开发库
 
@@ -48,6 +50,8 @@
 
 #### Android Studio
 
+> 导入android源码：https://blog.csdn.net/QQxiaoqiang1573/article/details/72903237 / https://www.cnblogs.com/qinyongxw/p/5349641.html / https://www.cnblogs.com/l2rf/p/6433773.html
+>
 > 开发 java 工程：https://stackoverflow.com/questions/28957283/android-studio-create-java-project-with-no-android-dependencies / https://blog.csdn.net/u011368551/article/details/51980678
 >
 > 添加 aar：https://www.cnblogs.com/zhaoyanjun/p/5776114.html
@@ -205,12 +209,18 @@
 > iperf3 编译及使用：http://www.veryarm.com/503.html / https://fasterdata.es.net/performance-testing/network-troubleshooting-tools/iperf/ / https://iperf.fr/iperf-download.php
 >
 > iptables 限速：http://www.cnblogs.com/weifeng1463/p/6805994.html
+>
+> IxChariot：https://blog.csdn.net/meigang2012/article/details/51236669
 
 #### Android WIFI
 
 ##### 源码分析
 
 > 连接过程：https://blog.csdn.net/csdn_of_coder/article/details/51922801
+>
+> 扫描机制：https://blog.csdn.net/h784707460/article/details/79658950 / https://blog.csdn.net/h784707460/article/details/79702275 / https://blog.csdn.net/izobs_lin/article/details/52857089
+>
+> 启动WIFI：https://blog.csdn.net/h784707460/article/details/79572861 / https://blog.csdn.net/a5205072/article/details/77682908
 
 ------
 
