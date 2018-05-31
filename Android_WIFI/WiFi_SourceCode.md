@@ -13,6 +13,7 @@ Android O 开始，又一次对 WIFI 进行重构
 1. 加载驱动流程变更
 2. 添加判断 STA/AP 是否共存
 3. 在临近 HAL 层之上 framework 增加了 HAL 层的接口及设备管理接口
+4. 使用 HIDL，不再使用 com_android_server_wifi_WifiNative.cpp，从 system.img 移除 hal ，方便升级
 
 ------
 
@@ -117,6 +118,10 @@ Android O 开始，又一次对 WIFI 进行重构
 >    <u>状态机切换时，使用 ==transitionTo== 转换，但转换时需要注意状态机的初始化中，是否有这两个状态的直接转化，若没有，则需要由目的状态的父状态寻找，直到源状态的父状态，一般简单状态机仅需要一个或两个过渡即可</u>
 >
 >    首先，ApStaDisabledState -> DefaultState -> StaEnabledState[WifiStateMachine.setSupplicantRunning(true)] -> DeviceActiveState[WifiStateMachine.setOperationalMode(CONNECT), setHighPerfModeEnabled(false)]
+>
+> 3. WifiStateMachine 启动 Supplicant，默认在 InitialState，接收到 CMD_START_SUPPLICANT
+>
+>    - 加载驱动   WifiNative.setupForClientMode
 
 ------
 
@@ -182,6 +187,13 @@ Android O 开始，又一次对 WIFI 进行重构
 > 
 > DisconnectedState
 >    case CMD_NO_NETWORKS_PERIODIC_SCAN
+> ```
+>
+> /frameworks/base/core/res/res/values
+>
+> ```java
+> <!-- Integer indicating the framework no networks periodic scan interval in milliseconds. -->
+> <integer translatable="false" name="config_wifi_no_network_periodic_scan_interval">300000</integer>
 > ```
 
 由以上可知，在原始代码情况下，仍有功耗优化的空间，如非 WIFI 界面，无网络，或仅保存一个且已连接等

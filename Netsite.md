@@ -28,7 +28,9 @@
 >
 > android.mk 引用：https://blog.csdn.net/gdutxiaoxu/article/details/78187420?locationNum=2&fps=1
 >
-> 过程：https://www.jianshu.com/p/3922ec229077
+> 完整过程：https://www.jianshu.com/p/3922ec229077
+>
+> HIDL：https://blog.csdn.net/ch853199769/article/details/77840099
 
 #### APP开发库
 
@@ -317,3 +319,12 @@
 > SSL 工作原理：https://blog.csdn.net/ENERGIE1314/article/details/54581411
 >
 > 廖雪峰Python教程：https://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000
+>
+> 快搜：http://search.chongbuluo.com/
+>
+> 程序员导航：http://code.giffox.com/
+>
+> Etcher：https://etcher.io/
+>
+> SD 卡格式化：https://www.sdcard.org/chs/downloads/formatter_4/index.html
+
