@@ -6,9 +6,10 @@
 
 1. 将某些功能单独取出成为独立模块，如扫描等
 2. 增加新的控制管理，如 WifiInjector，WifiConnectivityManager
-3. 其他基本调用流程不变，大致为 WifiService -> WifiStateMachine -> WifiNative -> JNI -> wpa_supplicant -> kernel -> driver
+3. 去除了 wifi.c，加载驱动代码放在了 wifi_hal_common.cpp，即出现了重构 HAL 的最有利迹象
+4. 其他基本调用流程不变，大致为 WifiService -> WifiStateMachine -> WifiNative -> JNI -> wpa_supplicant -> kernel -> driver
 
-Android O 开始，又一次对 WIFI 进行重构
+Android O 开始，又一次对 WIFI 进行重构 （JNI、HAL、HIDL）
 
 1. 加载驱动流程变更
 2. 添加判断 STA/AP 是否共存
@@ -17,7 +18,38 @@ Android O 开始，又一次对 WIFI 进行重构
 
 ------
 
+### Android O WIFI 架构
 
+Android O 开始 Treble 化，架构变化较大
+
+WIFI 中 HIDL 架构如下：
+
+![treble_hidl](..\png\Android_Wifi\treble_hidl.png)
+
+可以看到增加了一个 **wificond** 和 新的 **HIDL** ，之前 framework 层通过 JNI 调用 cpp，去操作 kernel/driver，现在彻底摒弃了这种方式，通过 HIDL 接口化，将 framework 和 OEM 代码彻底分开，方便进行 Android 的 system  部分升级
+
+Android O WIFI 架构如下：
+
+![wifi_arch](..\png\Android_Wifi\wifi_arch.png)
+
+增加了 wificond，在 /system/connectivity/wificond，在 WifiNative 之下，用于调用 wpa_supplicant，不同于之前的 android 版本
+
+------
+
+### WifiStateMachine
+
+WifiStateMachine 是最重要的 WIFI 状态机，状态切换如下：
+
+![WifiStateMachine](..\png\Android_Wifi\WifiStateMachine_state.png)
+
+初始状态为 InitialState
+
+状态切换原则为：
+
+1. 按照状态切换图以箭头方向转换
+2. 若代码中转换不能在状态转换图中发现，则向上回溯至父状态进行转换
+
+------
 
 ### 开机启动 Service
 
@@ -121,7 +153,29 @@ Android O 开始，又一次对 WIFI 进行重构
 >
 > 3. WifiStateMachine 启动 Supplicant，默认在 InitialState，接收到 CMD_START_SUPPLICANT
 >
->    - 加载驱动   WifiNative.setupForClientMode
+>    - WifiNative.setupForClientMode
+>
+>      - startHalIfNecessary(true)
+>
+>        - WifiVendorHal.isVendorHalSupported() ----> WifiVendorHal.startVendorHal(true)
+>
+>          - HalDeviceManager.createStaIface(null, null)
+>
+>            driver_tool.LoadDriver()                 (opt/net/wifi/libwifi_hal/)
+>
+>            ​    wifi_hal_common.wifi_load_driver()    (opt/net/wifi/libwifi_hal/)
+>
+>          - HalDeviceManager.getChip()
+>
+>    - WifiNative.enableSupplicant
+>
+>      - WificondControl.enableSupplicant
+>
+>        - client_interface_impl.EnableSupplicant    (system/connectivity/wificond/)
+>
+>          - supplicant_manager.StartSupplicant      (opt/net/wifi/libwifi_system/)
+>
+>            通过 `property_set("ctl.start", "wpa_supplicant")` 启动 wpa_supplicant
 
 ------
 
