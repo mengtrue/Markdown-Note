@@ -121,7 +121,9 @@ Raspberry Pi Support：https://ncsforum.movidius.com/discussion/118/movidius-nc-
 - 完整 SDK 模式  https://developer.movidius.com/start
 - 仅 API 模式，安装速度快，但无法对图形文件进行分析、验证和神经计算
 
-#### API 模式
+API 模式，仅能完成学习部分，与完整 SDK 模式，仅安装不同
+
+#### 安装
 
 > 1. 在 RPI 安装 Python 依赖
 >
@@ -132,16 +134,27 @@ Raspberry Pi Support：https://ncsforum.movidius.com/discussion/118/movidius-nc-
 > 2. 下载 NCS SDK
 >
 >    ```markdown
->    
+>    mkdir -p ~/workspace
+>    cd ~/workspace
+>    git clone https://github.com/movidius/ncsdk
 >    ```
 >
 > 3. 编译安装 NCS SDK API
 >
 >    ```
->    
+>    cd ~/workspace/ncsdk/api/src
+>    make
+>    sudo make install
 >    ```
 >
-> 4. 实例工程验证
+> 4. 安装 NCSDK
+>
+>    ```
+>    cd ~/workspace/ncsdk
+>    make install
+>    ```
+>
+> 5. 实例工程验证
 >
 >    ```
 >    cd ~/workspace
@@ -157,23 +170,159 @@ Raspberry Pi Support：https://ncsforum.movidius.com/discussion/118/movidius-nc-
 >    Goodbye NCS! Device closed normally.
 >    NCS device working.
 >    ```
+
+#### 图形分类
+
+> 在下面进行图形识别前，还必须得到基于 GoogleNet 的图形文件，此图形文件需要在 SDK 完整工具包生成，即需要在完整安装了 SDK 的开机机器上生成，然后拷贝到 RPI
 >
->    在下面进行图形识别前，还必须得到基于 GoogleNet 的图形文件，此图形文件需要在 SDK 完整工具包生成，即需要在完整安装了 SDK 的开机机器上生成，然后拷贝到 RPI
->
->    生成图形文件：https://movidius.github.io/ncsdk/tools/compile.html
+> 1. 生成图形文件：https://movidius.github.io/ncsdk/tools/compile.html
 >
 >    ```
 >    mvNCCompile deploy.prototxt -w bvlc_googlenet.caffemodel -s 12 -in input -on prob -is 224 224 -o GoogLeNet.graph
 >    ```
 >
-> 5. 进行图形分类
+> 2. 构建图形分类
 >
->    https://movidius.github.io/blog/ncs-image-classifier/
+>    参考：https://movidius.github.io/blog/ncs-image-classifier/
 >
 >    深入学习使用多个相互连接的神经元层，每个层使用特定的计算机算法识别和分类特定描述符。深神经网络 DNN 将任务分解成许多简单算法的能力可与更大的描述符集一起工作
 >
 >    图像分类：假定整个图像只有一个对象
 >
 >    图像检测：可处理同一图像中的多个对象，还可识别出在图像中的位置
+>
+>    ```markdown
+>    cd ~/workspace
+>    git clone https://github.com/movidius/ncappzoo
+>    cd ncappzoo/apps/image-classifier
+>    python3 image-classifier.py
+>    
+>    ## output
+>    ------- predictions --------
+>    prediction 1 is n02123159 tiger cat
+>    prediction 2 is n02124075 Egyptian cat
+>    prediction 3 is n02113023 Pembroke, Pembroke Welsh corgi
+>    prediction 4 is n02127052 lynx, catamount
+>    prediction 5 is n02971356 carton
+>    ```
+>
+> 3. 构建图像分类器，只需几行 Python 脚本，以下为可配置的图像分类器参数
+>
+>    - GRAPH_PATH：图形文件的位置
+>
+>      默认设置为 ~/workspace/ncappzoo/caffe/GoogLeNet/graph
+>
+>    - IMAGE_PATH：进行分类的图像的位置
+>
+>      默认设置为 ~/workspace/ncappzoo/data/image/cat.jpg
+>
+>    - IMAGE_DIM：所选用的神经网络定义的图像尺寸
+>
+>      GoogLeNet 使用 224 x 224 像素，AlexNet 使用 227 x 227 像素
+>
+>    - IMAGE_STDDEV：所选用的神经网络定义的标准偏差
+>
+>      GoogLeNet 不使用缩放因子，InceptionV3 使用 128 （stddev = 1/128）
+>
+>    - IMAGE_MEAN：平均减法，深度学习中用于数据中心的常用方法
+>
+>      ILSVRC 数据集，平均值 B = 102，绿色 = 117，红色 = 123
+
+#### SDK 推断
+
+首先需要从 mvnc 库中导入 mvncapi 模块
+
+```python
+import mvnc.mvncapi as mvnc
+```
+
+> 1. 打开枚举的设备
+>
+>    调用 API 查找枚举的 NCS 设备
+>
+>    ```python
+>    # Look for enumerated Intel Movidius NCS device(s); quit program if none found.
+>    devices = mvnc.EnumerateDevices()
+>    if len( devices ) == 0:
+>        print( 'No devices found' )
+>        quit()
+>    
+>    ## only select one NCS
+>    # Get a handle to the first enumerated device and open it
+>    device = mvnc.Device( devices[0] )
+>    device.OpenDevice()
+>    ```
+>
+>    **可将多个神经计算棒连接到同一个处理器，以扩展性能**
+>
+> 2. 将图形文件加载到 NCS
+>
+>    这里，使用预先编译的 AlexNet 模型（在 ncappzoo 文件夹中运行 `make` ）
+>
+>    ```python
+>    # Read the graph file into a buffer
+>    with open( GRAPH_PATH, mode='rb' ) as f:
+>        blob = f.read()
+>    
+>    # Load the graph buffer into the NCS
+>    graph = device.AllocateGraph( blob )
+>    ```
+>
+> 3. 将单个映像使用 NCS 进行推断
+>
+>    所有的神经网络处理由 NCS 单独完成，释放处理器的 CPU 和内存资源
+>
+>    需要对图像进行预处理
+>
+>    - 调整/裁剪图像以匹配预编译的模型   **IMAGE_DIM**
+>    - 从整个数据集中平均减法  **IMAGE_MEAN**
+>    - 将图像转换为半精度浮点型（fp16）数组，使用 `LoadTensor` 函数将图像加载到 NCS
+>
+>    ```Python
+>    # Read & resize image [Image size is defined during training]
+>    img = print_img = skimage.io.imread( IMAGES_PATH )
+>    img = skimage.transform.resize( img, IMAGE_DIM, preserve_range=True )
+>    
+>    # Convert RGB to BGR [skimage reads image in RGB, but Caffe uses BGR]
+>    img = img[:, :, ::-1]
+>    
+>    # Mean subtraction & scaling [A common technique used to center the data]
+>    img = img.astype( numpy.float32 )
+>    img = ( img - IMAGE_MEAN ) * IMAGE_STDDEV
+>    
+>    # Load the image as a half-precision floating point array
+>    graph.LoadTensor( img.astype( numpy.float16 ), 'user object' )
+>    ```
+>
+> 4. 从 NCS 读取和打印推理结果
+>
+>    可选择使用阻塞或非阻塞函数调用加载图像及获取推断结果，这里使用 阻塞调用
+>
+>    ```python
+>    # Get the results from NCS
+>    output, userobj = graph.GetResult()
+>    
+>    # Print the results
+>    print('\n------- predictions --------')
+>    
+>    labels = numpy.loadtxt( LABELS_FILE_PATH, str, delimiter = '\t' )
+>    
+>    order = output.argsort()[::-1][:6]
+>    for i in range( 0, 5 ):
+>        print ('prediction ' + str(i) + ' is ' + labels[order[i]])
+>    
+>    # Display the image on which inference was performed
+>    skimage.io.imshow( IMAGES_PATH )
+>    skimage.io.show( )
+>    ```
+>
+> 5. 卸载并关闭
+>
+>    为避免内存泄漏或分割错误，应关闭所有打开的文件或资源，并解除分配任何已用的内存
+>
+>    ```python
+>    graph.DeallocateGraph()
+>    device.CloseDevice()
+>    ```
 >
 >    
