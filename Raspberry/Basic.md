@@ -48,6 +48,21 @@ Raspberry Pi，中文为 树莓派，简写为 RPi，或 RasPi，卡片式电脑
 
 ------
 
+### 安装 Windows 10 IoT
+
+参考：https://docs.microsoft.com/en-us/windows/iot-core/getstarted
+
+https://docs.microsoft.com/en-us/windows/iot-core/tutorials/quickstarter/devicesetup#using-the-iot-dashboard-raspberry-pi-and-minnowboard
+
+https://www.windowscentral.com/how-install-windows-10-iot-raspberry-pi-3
+
+> 1. 安装工具  IoT Dashboard
+> 2. 在 IoT Dashboard 设置新设备
+> 3. 进行安装
+> 4. 开机后，远程访问用户名：Administrator，密码：p@ssw0rd
+
+------
+
 ### Camera Sensor
 
 官方介绍：https://www.raspberrypi.org/documentation/raspbian/applications/camera.md

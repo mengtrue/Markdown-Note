@@ -327,4 +327,6 @@
 > Etcher：https://etcher.io/
 >
 > SD 卡格式化：https://www.sdcard.org/chs/downloads/formatter_4/index.html
+>
+> 清华镜像：https://mirrors.tuna.tsinghua.edu.cn/
 
