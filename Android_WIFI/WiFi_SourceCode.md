@@ -34,6 +34,8 @@ Android O WIFI 架构如下：
 
 增加了 wificond，在 /system/connectivity/wificond，在 WifiNative 之下，用于调用 wpa_supplicant，不同于之前的 android 版本
 
+Android HIDL：https://blog.csdn.net/qq_16775897/article/category/7240708
+
 ------
 
 ### WifiStateMachine

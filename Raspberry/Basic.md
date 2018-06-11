@@ -63,6 +63,16 @@ https://www.windowscentral.com/how-install-windows-10-iot-raspberry-pi-3
 
 ------
 
+### 安装 Ubuntu
+
+下载 Ubuntu 镜像：https://ubuntu-mate.org/download/
+
+安装方法：https://ubuntu-mate.org/raspberry-pi/
+
+需要用到工具：Win32 Disk Imager：https://sourceforge.net/projects/win32diskimager/
+
+------
+
 ### Camera Sensor
 
 官方介绍：https://www.raspberrypi.org/documentation/raspbian/applications/camera.md
