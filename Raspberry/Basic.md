@@ -73,6 +73,26 @@ https://www.windowscentral.com/how-install-windows-10-iot-raspberry-pi-3
 
 ------
 
+### 安装 CentOS
+
+安装参考：https://wiki.centos.org/SpecialInterestGroup/AltArch/Arm32/RaspberryPi3
+
+下载：http://mirror.centos.org/altarch/7/isos/armhfp/
+
+步骤：[参考](https://blog.csdn.net/elesos/article/details/80514659) 
+
+- 格式化 SD 卡
+- 下载系统，并解压得到 raw 文件
+- 使用 Win32DiskImager，写入系统镜像
+
+CentOS，采用 `yum` 安装软件，官方源速度过慢，可使用国内镜像，阿里 和 网易
+
+[替换 yum 源](https://www.cnblogs.com/renpingsheng/p/7845096.html) 
+
+[CentOS 介绍](https://wiki.centos.org/SpecialInterestGroup/AltArch/armhfp#head-1c815b610e02202bb55dc1bb1f830b11b9099e28) 
+
+------
+
 ### Camera Sensor
 
 官方介绍：https://www.raspberrypi.org/documentation/raspbian/applications/camera.md
