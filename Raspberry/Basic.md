@@ -93,6 +93,28 @@ CentOS，采用 `yum` 安装软件，官方源速度过慢，可使用国内镜�
 
 ------
 
+### 扩充SD卡空间
+
+默认只支持 4G 空间，可通过 `fdisk` 重写分区
+
+[参考](https://blog.csdn.net/xmm1981/article/details/79472095) 
+
+> 在终端中输入`fdisk /dev/mmcblk0`进入硬盘分区软件  
+>
+> 在软件中输入：
+>
+>  `p`——查看旧分区情况 
+>
+>  `d`——删除分区，并按照提示删除第三个分区 
+>
+>  `n`——添加一个分区，空间起始位置按照系统默认（默认是最大空间）
+>
+>  `p`——查看新分区情况  `w`——写入分区信息并退出软件  
+>
+> 在终端中输入：`reboot`重启树莓派  
+>
+> 在树莓派开机后在终端输入：`resize2fs /dev/mmcblk0p3`重新加载分区信息 
+
 ### Camera Sensor
 
 官方介绍：https://www.raspberrypi.org/documentation/raspbian/applications/camera.md
@@ -104,6 +126,8 @@ CentOS，采用 `yum` 安装软件，官方源速度过慢，可使用国内镜�
 RPi 默认已经支持较多的 USB Webcam，可从https://elinux.org/RPi_USB_Webcams 查询，包括但不限于
 
 USB WebCam 使用参考：https://www.raspberrypi.org/documentation/usage/webcams/ / https://linux.cn/article-5312-1.html
+
+板载定焦镜头，支持 1080p30，720p60，640x480p60/90
 
 #### Pi Cam
 
@@ -370,4 +394,7 @@ import mvnc.mvncapi as mvnc
 >    device.CloseDevice()
 >    ```
 >
->    
+
+### NCS
+
+参考：[高速目标检测](http://www.cnblogs.com/hellocwh/p/8587013.html) 
