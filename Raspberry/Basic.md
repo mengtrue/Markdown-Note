@@ -129,6 +129,8 @@ USB WebCam 使用参考：https://www.raspberrypi.org/documentation/usage/webcam
 
 板载定焦镜头，支持 1080p30，720p60，640x480p60/90
 
+camera python 编程参考：https://blog.csdn.net/talkxin/article/details/50504601
+
 #### Pi Cam
 
 > 支持 FHD 1080P，可编程
@@ -178,6 +180,12 @@ USB WebCam 使用参考：https://www.raspberrypi.org/documentation/usage/webcam
 >    ## 转换为每秒 30 帧的 mp4 视频
 >    MP4Box -fps 30 -add keychain.h264 keychain.mp4
 >    ```
+
+### OpenCV
+
+安装参考：https://blog.csdn.net/talkxin/article/details/50504601
+
+如果连接失败，可切换镜像源：https://mirrors.tuna.tsinghua.edu.cn/help/raspbian/
 
 ### Movidius Neural Compute Stick
 
