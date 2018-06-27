@@ -183,7 +183,7 @@ camera python 编程参考：https://blog.csdn.net/talkxin/article/details/50504
 
 ### OpenCV
 
-安装参考：https://blog.csdn.net/talkxin/article/details/50504601
+安装参考：https://blog.csdn.net/u010429424/article/details/76824521
 
 如果连接失败，可切换镜像源：https://mirrors.tuna.tsinghua.edu.cn/help/raspbian/
 
