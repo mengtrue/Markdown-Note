@@ -8,6 +8,8 @@ Raspberry Pi，中文为 树莓派，简写为 RPi，或 RasPi，卡片式电脑
 
 硬件信息：https://elinux.org/RPi_VerifiedPeripherals
 
+本地 PC 和 树莓派之间可通过 SSH 进行远程访问，以及使用 SFTP 进行文件共享，可使用 Filezilla 进行访问，仅需要在主机中输入 `sftp:\\xx.xx.xx.xx` ，默认用户名为：`pi` ，默认密码是：`raspberry` 
+
 ------
 
 ### 系统安装
@@ -184,6 +186,8 @@ camera python 编程参考：https://blog.csdn.net/talkxin/article/details/50504
 ### OpenCV
 
 安装参考：https://blog.csdn.net/u010429424/article/details/76824521
+
+openCV Github：https://github.com/opencv/opencv/tree/3.4.1
 
 如果连接失败，可切换镜像源：https://mirrors.tuna.tsinghua.edu.cn/help/raspbian/
 
