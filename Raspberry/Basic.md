@@ -410,3 +410,9 @@ import mvnc.mvncapi as mvnc
 ### NCS
 
 参考：[高速目标检测](http://www.cnblogs.com/hellocwh/p/8587013.html) 
+
+### 交叉编译
+
+Windows 平台编译树莓派可执行程序：http://etrd.org/2017/01/25/Windows%E4%B8%8B%E5%BB%BA%E7%AB%8B%E7%AC%AC%E4%B8%80%E4%B8%AA%E6%A0%91%E8%8E%93%E6%B4%BE%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F/ | http://blog.sina.com.cn/s/blog_45262c8b01016rya.html
+
+Ubuntu 编译树莓派：http://www.cnblogs.com/xieyajie/p/4699724.html

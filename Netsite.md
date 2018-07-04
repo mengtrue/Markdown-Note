@@ -79,6 +79,8 @@
 > 文件读取写入：https://blog.csdn.net/zadarrien_china/article/details/55226068
 >
 > Service：https://blog.csdn.net/love_yan_1314/article/details/53572617
+>
+> Viewgroup 触摸事件：http://www.cnblogs.com/cr330326/p/6762542.html
 
 #### 开发
 
@@ -279,6 +281,8 @@
 > awesome-macOS：https://github.com/iCHAIT/awesome-macOS
 >
 > open-source-mac-os-apps：https://github.com/serhii-londar/open-source-mac-os-apps
+>
+> Luyten Decompiler：https://github.com/deathmarine/Luyten
 
 ------
 
@@ -355,4 +359,14 @@
 > reep.io：https://reep.io/
 >
 > plover.io：http://plover.io/
+>
+> WAN ANDROID：http://www.wanandroid.com/article/list/0
+>
+> 知轩藏书：http://www.zxcs8.com
+>
+> 超高无损音乐下载：https://sq668.com
+>
+> 花瓣网：http://huaban.com
+>
+> PPT模板：http://tretars.com
 
