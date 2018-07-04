@@ -201,6 +201,10 @@
 > 信道：https://en.wikipedia.org/wiki/List_of_WLAN_channels
 >
 > ISO 3-digit Country Code：https://wits.worldbank.org/wits/wits/witshelp/Content/Codes/Country_Codes.htm
+>
+> Wifi SmartConfig：http://www.yfrobot.com/thread-11795-1-1.html
+>
+> Wifi Easy Connect：https://www.wi-fi.org/discover-wi-fi/wi-fi-easy-connect
 
 #### 协议
 
@@ -269,6 +273,12 @@
 > 码云：https://gitee.com/contrast
 >
 > Yosoro：https://github.com/IceEnd/Yosoro
+>
+> awesome-mac：https://github.com/jaywcjlove/awesome-mac
+>
+> awesome-macOS：https://github.com/iCHAIT/awesome-macOS
+>
+> open-source-mac-os-apps：https://github.com/serhii-londar/open-source-mac-os-apps
 
 ------
 
@@ -337,4 +347,12 @@
 > SDK.CN：https://sdk.cn/services
 >
 > Bithublab：https://www.bithublab.org/
+>
+> Maven Repository：http://search.maven.org/
+>
+> 腾讯课堂：https://ke.qq.com/
+>
+> reep.io：https://reep.io/
+>
+> plover.io：http://plover.io/
 
