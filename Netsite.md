@@ -369,4 +369,10 @@
 > 花瓣网：http://huaban.com
 >
 > PPT模板：http://tretars.com
+>
+> oldmanemu：http://www.oldmanemu.net/
+>
+> Dism++ ：https://www.chuyu.me/zh-Hans/
+>
+> easyicon：https://www.easyicon.net/
 

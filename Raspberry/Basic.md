@@ -185,11 +185,23 @@ camera python 编程参考：https://blog.csdn.net/talkxin/article/details/50504
 
 ### OpenCV
 
+安装 CMake : https://cmake.org/download/ | https://askubuntu.com/questions/610291/how-to-install-cmake-3-2-on-ubuntu
+
 安装参考：https://blog.csdn.net/u010429424/article/details/76824521
 
 openCV Github：https://github.com/opencv/opencv/tree/3.4.1
 
 如果连接失败，可切换镜像源：https://mirrors.tuna.tsinghua.edu.cn/help/raspbian/
+
+安装 opencv 3 以下版本错误：https://stackoverflow.com/questions/40262928/error-compiling-opencv-fatal-error-stdlib-h-no-such-file-or-directory
+
+```
+
+```
+
+```
+pkg-config opencv --cflag --libs
+```
 
 ### Movidius Neural Compute Stick
 
@@ -413,6 +425,57 @@ import mvnc.mvncapi as mvnc
 
 ### 交叉编译
 
-Windows 平台编译树莓派可执行程序：http://etrd.org/2017/01/25/Windows%E4%B8%8B%E5%BB%BA%E7%AB%8B%E7%AC%AC%E4%B8%80%E4%B8%AA%E6%A0%91%E8%8E%93%E6%B4%BE%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F/ | http://blog.sina.com.cn/s/blog_45262c8b01016rya.html
+Windows 平台编译树莓派可执行程序：http://etrd.org/2017/01/25/Windows%E4%B8%8B%E5%BB%BA%E7%AB%8B%E7%AC%AC%E4%B8%80%E4%B8%AA%E6%A0%91%E8%8E%93%E6%B4%BE%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F/ | http://blog.sina.com.cn/s/blog_45262c8b01016rya.html |https://visualgdb.com/tutorials/raspberry/crosscompiler/
 
 Ubuntu 编译树莓派：http://www.cnblogs.com/xieyajie/p/4699724.html
+
+GetTickCount  windows 系统 api，Linux 需要定义：https://stackoverflow.com/questions/7729686/convert-gettickcount-vxworks-to-linux
+
+### 南京代码编译
+
+从南京 sarah.su 获取代码，直接在树莓派上进行编译（使用CMake，用到 opencv 库）
+
+OpenCV : 2.4.13,  CMake：2.10
+
+编译错误一：
+
+部分 `Include` 文件找不到，需要在相应文件中加入
+
+编译错误二：
+
+`GetTickCount` 函数找不到，此 API 是 Windows 平台，需要替换，或者定义此函数，或者更换 API
+
+参考：https://stackoverflow.com/questions/7729686/convert-gettickcount-vxworks-to-linux
+
+```cpp
+ddouble GetTickCount(void)
+{
+    struct timespec now;
+    if (clock_gettime(CLOCK_MONOTONIC, &now))
+        return 0;
+    return now.tv_sec * 1000.0 + now.tv_nsec / 1000000.0;
+}
+```
+
+在相应文件内部添加此定义
+
+后又出现 multi define，因为两个文件都使用到，暴力，可在某个文件定义处，添加 `static` 
+
+编译错误三：
+
+`Linking CXX executable testLocate ` 具体错误为 opencv 引用 undefine reference ，网上查询得知 opencv 静态编译库未链接到程序中
+
+https://www.cnblogs.com/wmr95/p/8193418.html
+
+解决办法参考 ：https://raspberrypi.stackexchange.com/questions/38430/undefined-reference-to-raspicam-privateprivate-impl，在程序 CMakeLists.txt 最后添加
+
+```cmake
+target_link_libraries(testLocate ${OpenCV_LIBS})
+```
+
+运行
+
+```shell
+./testLocate ../../../data/temp1.bmp 1496 695 429 425 ../../../data/2.bmp 1595 625 823 645
+```
+
