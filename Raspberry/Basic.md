@@ -479,3 +479,14 @@ target_link_libraries(testLocate ${OpenCV_LIBS})
 ./testLocate ../../../data/temp1.bmp 1496 695 429 425 ../../../data/2.bmp 1595 625 823 645
 ```
 
+### GPU
+
+Broadcom VideoCore IV
+
+[Raspberry Pi VideoCore APIs](https://elinux.org/Raspberry_Pi_VideoCore_APIs) 
+
+### 购买
+
+链接：https://item.taobao.com/item.htm%C2%A9id=556129616183&ali_refid=a3_430582_1006:1107299452:N:%E6%A0%91%E8%8E%93%E6%B4%BE:881676c620f8048a7cb2db126f9a7f9f&ali_trackid=1_881676c620f8048a7cb2db126f9a7f9f&spm=a230r.1.14.3#detail
+
+订单号找 yami.yang 
