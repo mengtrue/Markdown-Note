@@ -283,6 +283,8 @@
 > open-source-mac-os-apps：https://github.com/serhii-londar/open-source-mac-os-apps
 >
 > Luyten Decompiler：https://github.com/deathmarine/Luyten
+>
+> Github Android UI：https://hndeveloper.github.io/2017/github-android-ui.html#%E8%A1%A8%E5%8D%95
 
 ------
 
@@ -375,4 +377,47 @@
 > Dism++ ：https://www.chuyu.me/zh-Hans/
 >
 > easyicon：https://www.easyicon.net/
+>
+> leetcode：https://leetcode-cn.com/
+>
+> Flutter：https://flutter.io/
+>
+> Gson：https://blog.csdn.net/chenyannan0617/article/details/51912789
+>
+> Listview 滚动显示重复数据问题：https://blog.csdn.net/u013918353/article/details/46473463
+>
+> https://ihtcboy.com/2018/07/15/2018-07-15_%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84macOS%E7%B3%BB%E5%88%97%EF%BC%9A%E7%B2%BE%E9%80%89MacApp/
+>
+> 传送门：http://chuansong.me/
 
+### RSS
+
+> 爱范儿：https://www.ifanr.com/feed
+>
+> 反斗软件：http://www.apprcn.com/feed  <http://free.apprcn.com/feed/> 
+>
+> 干货集中营：https://gank.io/feed
+>
+> 异次元软件世界：https://feed.iplaysoft.com   https://feed.ipcfun.com
+>
+> 知乎：<http://www.zhihu.com/rss> 
+>
+> 煎蛋：http://feedex.net/feed/jandan.net/feed
+>
+> 孤岛客：http://www.huangjiwei.com/blog/?feed=rss2
+>
+> 博客：
+>
+> biezhihua：https://blog.csdn.net/biezhihua/rss/list
+>
+> chenyannan0617：https://blog.csdn.net/chenyannan0617/rss/list
+>
+> Hongyang：https://blog.csdn.net/lmj623565791/rss/list
+>
+> 崔庆才的个人博客：https://cuiqingcai.com/?feed=rss2
+>
+> wenzhi：https://blog.csdn.net/wenzhi20102321/rss/list
+>
+> 博客园：http://feed.cnblogs.com/blog/sitehome/rss
+>
+> 郭霖：https://blog.csdn.net/guolin_blog/rss/list

@@ -73,6 +73,8 @@ https://www.windowscentral.com/how-install-windows-10-iot-raspberry-pi-3
 
 需要用到工具：Win32 Disk Imager：https://sourceforge.net/projects/win32diskimager/
 
+Raspberry Pi 3 B+ 不能启动，当前 16.04.2 ，参考：https://ubuntu-mate.community/t/ubuntu-mate-for-raspberry-pi-3-model-b/15867 | https://wiki.ubuntu.com/ARM/RaspberryPi
+
 ------
 
 ### 安装 CentOS
@@ -443,6 +445,12 @@ OpenCV : 2.4.13,  CMake：2.10
 
 编译错误二：
 
+<stdlib.h> No such file or directory
+
+cmake -D ENABLE_PRECOMPILED_HEADERS=OFF ... 
+
+编译错误二：
+
 `GetTickCount` 函数找不到，此 API 是 Windows 平台，需要替换，或者定义此函数，或者更换 API
 
 参考：https://stackoverflow.com/questions/7729686/convert-gettickcount-vxworks-to-linux
@@ -476,8 +484,24 @@ target_link_libraries(testLocate ${OpenCV_LIBS})
 运行
 
 ```shell
-./testLocate ../../../data/temp1.bmp 1496 695 429 425 ../../../data/2.bmp 1595 625 823 645
+./testLocate ../../../data/templ.bmp 1496 695 429 425 ../../../data/2.bmp 1595 625 823 645
 ```
+
+开启 NEON
+
+```markdown
+cmake -D CMAKE_BUILD_TYPE=RELEASE \
+    -D CMAKE_INSTALL_PREFIX=/usr/local \
+    -D OPENCV_EXTRA_MODULES_PATH=~/opencv_contrib-3.3.0/modules \
+    -D ENABLE_NEON=ON \
+    -D ENABLE_VFPV3=ON \
+    -D BUILD_TESTS=OFF \
+    -D INSTALL_PYTHON_EXAMPLES=OFF \
+    -D BUILD_EXAMPLES=OFF
+    -D ENABLE_PRECOMPILED_HEADERS=OFF ..
+```
+
+
 
 ### GPU
 
@@ -487,6 +511,6 @@ Broadcom VideoCore IV
 
 ### 购买
 
-链接：https://item.taobao.com/item.htm%C2%A9id=556129616183&ali_refid=a3_430582_1006:1107299452:N:%E6%A0%91%E8%8E%93%E6%B4%BE:881676c620f8048a7cb2db126f9a7f9f&ali_trackid=1_881676c620f8048a7cb2db126f9a7f9f&spm=a230r.1.14.3#detail
+链接：https://item.taobao.com/item.htm?spm=a1z10.3-c-s.w4002-14871668712.23.2a914dd6HANRLY&id=556129616183
 
 订单号找 yami.yang 
